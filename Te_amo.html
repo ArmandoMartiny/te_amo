@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rosa María, te amo</title>
+
+  <!-- Animate.css CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --accent: #ff4fa3;
+      --text: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(1200px circle at 50% 50%, #1a1a2e 0%, var(--bg) 60%);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+    }
+
+    .card {
+      text-align: center;
+      padding: 2.5rem 3rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(255, 79, 163, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .accent {
+      color: var(--accent);
+      text-shadow: 0 0 16px rgba(255, 79, 163, 0.4);
+    }
+
+    p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.86;
+    }
+
+    /* Corazones decorativos */
+    .hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      font-size: 1.8rem;
+      color: var(--accent);
+      opacity: 0.75;
+      animation: float 6s ease-in-out infinite;
+    }
+    .heart:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; }
+    .heart:nth-child(2) { right: 10%; top: 35%; animation-delay: 1s; }
+    .heart:nth-child(3) { left: 30%; bottom: 15%; animation-delay: 2s; }
+    .heart:nth-child(4) { right: 25%; bottom: 22%; animation-delay: 3s; }
+
+    @keyframes float {
+      0%   { transform: translateY(0) scale(1); opacity: 0.75; }
+      50%  { transform: translateY(-12px) scale(1.08); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.75; }
+    }
+
+    /* Hover: re-dispara el efecto */
+    .card:hover .animate__animated {
+      animation-duration: 1.2s; /* más rápido al pasar el mouse */
+    }
+
+    /* Botón opcional */
+    .btn {
+      margin-top: 1.2rem;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(255, 79, 163, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts">
+    <div class="heart">💖</div>
+    <div class="heart">💘</div>
+    <div class="heart">💝</div>
+    <div class="heart">💞</div>
+  </div>
+
+  <main class="card">
+    <!-- Texto con Animate.css -->
+    <h1 class="animate__animated animate__fadeInDown">
+      <span class="accent">Rosa María</span>, te amo
+    </h1>
+    <p class="animate__animated animate__fadeIn animate__delay-1s">
+      Con todo mi corazón, hoy y siempre.
+    </p>
+
+    <!-- Re-disparar animación al hacer click -->
+    <button class="btn" id="replay">Repetir animación</button>
+  </main>
+
+  <script>
+    // Reproducir nuevamente las animaciones al hacer click
+    const replayBtn = document.getElementById('replay');
+    replayBtn.addEventListener('click', () => {
+      document.querySelectorAll('.animate__animated').forEach(el => {
+        el.classList.remove('animate__animated'); // reset
+        void el.offsetWidth; // reflow
+        el.classList.add('animate__animated'); // start again
+      });
+    });
+  </script>
+</body>
+</html>
